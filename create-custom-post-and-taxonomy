@@ -1,3 +1,4 @@
+/* Here You change as per your post name and taxonomy name*/
 function register_newpost_post_type() {
     $labels = array(
         'name'               => 'New Post',
