@@ -1,0 +1,68 @@
+function register_newpost_post_type() {
+    $labels = array(
+        'name'               => 'New Post',
+        'singular_name'      => 'New Post',
+        'menu_name'          => 'New Post',
+        'name_admin_bar'     => 'New Post',
+        'add_new'            => 'Add New',
+        'add_new_item'       => 'Add New New Post',
+        'new_item'           => 'New New Post',
+        'edit_item'          => 'Edit New Post',
+        'view_item'          => 'View New Post',
+        'all_items'          => 'All New Post',
+        'search_items'       => 'Search New Post',
+        'parent_item_colon'  => 'Parent New Post',
+        'not_found'          => 'No product found.',
+        'not_found_in_trash' => 'No product found in Trash.'
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'newpost' ),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => 20,
+        'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
+    );
+
+    register_post_type( 'newpost', $args );
+}
+add_action( 'init', 'register_property_post_type' );
+
+function create_custom_taxonomies() {
+
+    $status = array(
+        'name'              => _x('Status', 'taxonomy general name'),
+        'singular_name'     => _x('Status', 'taxonomy singular name'),
+        'search_items'      => __('Search Status'),
+        'all_items'         => __('All Status'),
+        'parent_item'       => __('Parent Status'),
+        'parent_item_colon' => __('Parent Status:'),
+        'edit_item'         => __('Edit Status'),
+        'update_item'       => __('Update Status'),
+        'add_new_item'      => __('Add New Status'),
+        'new_item_name'     => __('New Status Name'),
+        'menu_name'         => __('Status'),
+    );
+	  $status_args = array(
+        'hierarchical'      => true,
+        'labels'            => $status,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'status'),
+    );
+
+    register_taxonomy('status', array('property'), $status_args);
+}
+
+add_action('init', 'create_custom_taxonomies', 0);
+
+
+
